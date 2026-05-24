@@ -14,7 +14,7 @@ cat > manifest.json <<EOF
       {
         "version": "0.1.0.0",
         "changelog": "Initial experimental alpha release.",
-        "targetAbi": "10.11.0.0",
+        "targetAbi": "10.11.8",
         "sourceUrl": "https://github.com/CloudFromAbove/CineHover/releases/download/v0.1.0-alpha/CineHover-0.1.0-alpha.zip",
         "checksum": "33f51cb6ec5b68b122f2abdd9835f320",
         "timestamp": "$DATE_UTC"
