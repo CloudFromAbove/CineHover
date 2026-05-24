@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <AssemblyName>Jellyfin.Plugin.CinemaHover</AssemblyName>
+    <RootNamespace>Jellyfin.Plugin.CinemaHover</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Nullable>enable</Nullable>
+      <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Jellyfin.Controller" Version="10.11.8" />
+    <PackageReference Include="Jellyfin.Model" Version="10.11.8" />
+  </ItemGroup>
+
+<ItemGroup>
+  <EmbeddedResource Include="Pages/**/*.html" />
+  <EmbeddedResource Include="Pages/**/*.js" />
+  <EmbeddedResource Include="Web/**/*.js" />
+  <EmbeddedResource Include="Web/**/*.css" />
+  <EmbeddedResource Include="Web/assets/**/*" />
+</ItemGroup>
+
+</Project>

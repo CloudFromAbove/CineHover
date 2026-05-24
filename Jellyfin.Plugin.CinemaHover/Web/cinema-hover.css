@@ -1,0 +1,128 @@
+using System;
+using System.Reflection;
+using Jellyfin.Plugin.CinemaHover.Configuration;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Jellyfin.Plugin.CinemaHover.Controllers;
+
+[ApiController]
+[Route("CinemaHover")]
+public class CinemaHoverController : ControllerBase
+{
+    [HttpGet("config")]
+    public ActionResult<PluginConfiguration> GetConfig()
+    {
+        if (Plugin.Instance is null)
+        {
+            return NotFound();
+        }
+
+        return Plugin.Instance.Configuration;
+    }
+
+    [HttpGet("client.js")]
+    public IActionResult GetClientScript()
+    {
+        return GetEmbeddedFile(
+            "Web.cinema-hover.client.js",
+            "application/javascript; charset=utf-8"
+        );
+    }
+
+    [HttpGet("style.css")]
+    public IActionResult GetStyle()
+    {
+        return GetEmbeddedFile(
+            "Web.cinema-hover.css",
+            "text/css; charset=utf-8"
+        );
+    }
+
+    [HttpGet("assets/{fileName}")]
+    public IActionResult GetAsset(string fileName)
+    {
+        if (
+            string.IsNullOrWhiteSpace(fileName) ||
+            fileName.Contains("..", StringComparison.Ordinal) ||
+            fileName.Contains("/", StringComparison.Ordinal) ||
+            fileName.Contains("\\", StringComparison.Ordinal)
+        )
+        {
+            return BadRequest();
+        }
+
+        return GetEmbeddedFile(
+            $"Web.assets.{fileName}",
+            GetContentType(fileName)
+        );
+    }
+
+    private static string GetContentType(string fileName)
+    {
+        if (fileName.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
+        {
+            return "image/png";
+        }
+
+        if (fileName.EndsWith(".svg", StringComparison.OrdinalIgnoreCase))
+        {
+            return "image/svg+xml; charset=utf-8";
+        }
+
+        if (fileName.EndsWith(".webp", StringComparison.OrdinalIgnoreCase))
+        {
+            return "image/webp";
+        }
+
+        if (
+            fileName.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
+            fileName.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase)
+        )
+        {
+            return "image/jpeg";
+        }
+
+        return "application/octet-stream";
+    }
+
+    private IActionResult GetEmbeddedFile(
+        string resourceSuffix,
+        string contentType)
+    {
+        var assembly =
+            Assembly.GetExecutingAssembly();
+
+        var resourceName =
+            Array.Find(
+                assembly.GetManifestResourceNames(),
+                name => name.EndsWith(
+                    resourceSuffix,
+                    StringComparison.Ordinal
+                )
+            );
+
+        if (resourceName is null)
+        {
+            return NotFound(
+                $"Embedded resource not found: {resourceSuffix}"
+            );
+        }
+
+        var stream =
+            assembly.GetManifestResourceStream(
+                resourceName
+            );
+
+        if (stream is null)
+        {
+            return NotFound(
+                $"Embedded resource stream not found: {resourceSuffix}"
+            );
+        }
+
+        return File(
+            stream,
+            contentType
+        );
+    }
+}

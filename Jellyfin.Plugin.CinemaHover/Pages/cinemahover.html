@@ -1,0 +1,407 @@
+<div
+    id="cinemaHoverConfigPage"
+    data-role="page"
+    class="page type-interior pluginConfigurationPage cinemaHoverConfigurationPage"
+>
+    <div data-role="content">
+        <div class="content-primary">
+
+            <form id="cinemaHoverConfigForm">
+
+                <div class="verticalSection cinemaHoverHeaderSection">
+                    <h2 class="sectionTitle" data-i18n="title">
+                        Cinema Hover
+                    </h2>
+
+                    <div class="cinemaHoverTabs" role="tablist">
+                        <button
+                            type="button"
+                            class="cinemaHoverTabButton active"
+                            data-tab="general"
+                            data-i18n="tabs.general"
+                        >
+                            Général
+                        </button>
+
+                        <button
+                            type="button"
+                            class="cinemaHoverTabButton"
+                            data-tab="trailers"
+                            data-i18n="tabs.trailers"
+                        >
+                            Trailers
+                        </button>
+
+                        <button
+                            type="button"
+                            class="cinemaHoverTabButton"
+                            data-tab="performance"
+                            data-i18n="tabs.performance"
+                        >
+                            Performance
+                        </button>
+
+                        <button
+                            type="button"
+                            class="cinemaHoverTabButton"
+                            data-tab="language"
+                            data-i18n="tabs.language"
+                        >
+                            Langue
+                        </button>
+
+                        <button
+                            type="button"
+                            class="cinemaHoverTabButton"
+                            data-tab="advanced"
+                            data-i18n="tabs.advanced"
+                        >
+                            Avancé
+                        </button>
+                    </div>
+                </div>
+
+                <div class="cinemaHoverTabPanel active" data-panel="general">
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label>
+                            <input
+                                is="emby-checkbox"
+                                type="checkbox"
+                                id="Enabled"
+                            >
+                            <span data-i18n="enabled">
+                                Activer Cinema Hover
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label>
+                            <input
+                                is="emby-checkbox"
+                                type="checkbox"
+                                id="DisableOnTouchDevices"
+                            >
+                            <span data-i18n="disableTouch">
+                                Désactiver sur appareils tactiles
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label
+                            class="inputLabel"
+                            for="DisableUnderWidth"
+                            data-i18n="disableUnderWidth"
+                        >
+                            Désactiver sous cette largeur
+                        </label>
+                        <input
+                            is="emby-input"
+                            id="DisableUnderWidth"
+                            type="number"
+                            min="0"
+                        >
+                        <div
+                            class="fieldDescription"
+                            data-i18n="disableUnderWidthHelp"
+                        >
+                            0 = jamais désactiver selon la largeur.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="cinemaHoverTabPanel" data-panel="trailers">
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label>
+                            <input
+                                is="emby-checkbox"
+                                type="checkbox"
+                                id="EnableLocalTrailers"
+                            >
+                            <span data-i18n="enableLocalTrailers">
+                                Activer les trailers locaux
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label>
+                            <input
+                                is="emby-checkbox"
+                                type="checkbox"
+                                id="EnableYouTubeTrailers"
+                            >
+                            <span data-i18n="enableYouTubeTrailers">
+                                Activer les trailers YouTube
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label>
+                            <input
+                                is="emby-checkbox"
+                                type="checkbox"
+                                id="PreferLocalTrailers"
+                            >
+                            <span data-i18n="preferLocalTrailers">
+                                Priorité aux trailers locaux
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="selectContainer">
+                        <label
+                            class="selectLabel"
+                            for="VideoPreloadMode"
+                            data-i18n="videoPreloadMode"
+                        >
+                            Préchargement vidéo
+                        </label>
+                        <select is="emby-select" id="VideoPreloadMode">
+                            <option value="none">none</option>
+                            <option value="metadata">metadata</option>
+                            <option value="auto">auto</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="cinemaHoverTabPanel" data-panel="performance">
+
+                    <div class="inputContainer">
+                        <label class="inputLabel" for="OpenDelay" data-i18n="openDelay">
+                            Délai d’ouverture
+                        </label>
+                        <input is="emby-input" id="OpenDelay" type="number" min="0">
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel" for="CloseDelay" data-i18n="closeDelay">
+                            Délai de fermeture
+                        </label>
+                        <input is="emby-input" id="CloseDelay" type="number" min="0">
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel" for="CardToHoverGrace" data-i18n="cardToHoverGrace">
+                            Tolérance card → hover
+                        </label>
+                        <input is="emby-input" id="CardToHoverGrace" type="number" min="0">
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel" for="LocalTrailerCooldownMs" data-i18n="localTrailerCooldown">
+                            Cooldown trailer local
+                        </label>
+                        <input is="emby-input" id="LocalTrailerCooldownMs" type="number" min="0">
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel" for="YouTubeRevealDelay" data-i18n="youtubeRevealDelay">
+                            Délai révélation YouTube
+                        </label>
+                        <input is="emby-input" id="YouTubeRevealDelay" type="number" min="0">
+                    </div>
+
+                </div>
+
+                <div class="cinemaHoverTabPanel" data-panel="language">
+
+                    <div class="selectContainer">
+                        <label
+                            class="selectLabel"
+                            for="InterfaceLanguage"
+                            data-i18n="interfaceLanguage"
+                        >
+                            Langue de l’interface
+                        </label>
+                        <select is="emby-select" id="InterfaceLanguage">
+                            <option value="fr">Français</option>
+                            <option value="en">English</option>
+                        </select>
+                    </div>
+
+                    <div class="selectContainer">
+                        <label
+                            class="selectLabel"
+                            for="NativeLanguage"
+                            data-i18n="nativeLanguage"
+                        >
+                            Langue native
+                        </label>
+                        <select is="emby-select" id="NativeLanguage">
+                            <option value="fr">Français</option>
+                            <option value="en">English</option>
+                        </select>
+                        <div
+                            class="fieldDescription"
+                            data-i18n="nativeLanguageHelp"
+                        >
+                            Définit les badges du hover : VF/VOST/VO ou Dub/Sub/Original.
+                        </div>
+                    </div>
+
+                    <div class="inputContainer">
+                        <label
+                            class="inputLabel"
+                            for="LanguageSeparator"
+                            data-i18n="languageSeparator"
+                        >
+                            Séparateur des badges
+                        </label>
+                        <input
+                            is="emby-input"
+                            id="LanguageSeparator"
+                            type="text"
+                        >
+                    </div>
+
+                </div>
+
+                <div class="cinemaHoverTabPanel" data-panel="advanced">
+
+                    <div class="inputContainer">
+                        <label class="inputLabel" for="HoverSafeMargin" data-i18n="hoverSafeMargin">
+                            Marge de sécurité hover
+                        </label>
+                        <input is="emby-input" id="HoverSafeMargin" type="number" min="0">
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel" for="BridgeHoldDelay" data-i18n="bridgeHoldDelay">
+                            Délai pont card-hover
+                        </label>
+                        <input is="emby-input" id="BridgeHoldDelay" type="number" min="0">
+                    </div>
+
+                    <div class="inputContainer">
+                        <label class="inputLabel" for="HoverZIndex" data-i18n="hoverZIndex">
+                            Z-index hover
+                        </label>
+                        <input is="emby-input" id="HoverZIndex" type="number" min="1">
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label>
+                            <input
+                                is="emby-checkbox"
+                                type="checkbox"
+                                id="Debug"
+                            >
+                            <span data-i18n="debug">
+                                Debug console
+                            </span>
+                        </label>
+                    </div>
+
+                    <div class="checkboxContainer checkboxContainer-withDescription">
+                        <label>
+                            <input
+                                is="emby-checkbox"
+                                type="checkbox"
+                                id="AutoRegisterWithJavaScriptInjector"
+                            >
+                            <span data-i18n="autoRegisterWithJavaScriptInjector">
+                                Enregistrer automatiquement le loader via JavaScript Injector
+                            </span>
+                        </label>
+                        <div
+                            class="fieldDescription"
+                            data-i18n="autoRegisterWithJavaScriptInjectorHelp"
+                        >
+                            Si JavaScript Injector est installé, CinemaHover peut y enregistrer automatiquement son loader.
+                        </div>
+                    </div>
+
+                </div>
+
+                <br>
+
+                <button
+                    is="emby-button"
+                    type="submit"
+                    class="raised button-submit block cinemaHoverSaveButton"
+                >
+                    <span data-i18n="save">Enregistrer</span>
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+    <style>
+        .cinemaHoverConfigurationPage .cinemaHoverHeaderSection {
+            margin-bottom: 1.5em;
+        }
+
+        .cinemaHoverConfigurationPage .cinemaHoverTabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .55em;
+            margin: 1.25em 0 1.5em;
+            padding-bottom: .35em;
+            border-bottom: 1px solid rgba(255, 255, 255, .16);
+        }
+
+        .cinemaHoverConfigurationPage .cinemaHoverTabButton {
+            appearance: none;
+            border: 1px solid rgba(255, 255, 255, .22);
+            background: rgba(255, 255, 255, .08);
+            color: rgba(255, 255, 255, .82);
+            border-radius: 999px;
+            padding: .55em 1.05em;
+            font-size: .95em;
+            font-weight: 500;
+            cursor: pointer;
+            transition:
+                background .15s ease,
+                color .15s ease,
+                border-color .15s ease,
+                box-shadow .15s ease,
+                transform .15s ease;
+        }
+
+        .cinemaHoverConfigurationPage .cinemaHoverTabButton:hover {
+            background: rgba(255, 255, 255, .15);
+            color: #fff;
+            border-color: rgba(255, 255, 255, .38);
+        }
+
+        .cinemaHoverConfigurationPage .cinemaHoverTabButton.active {
+            background: #00a4dc;
+            border-color: #00c7ff;
+            color: #fff;
+            box-shadow:
+                0 0 0 1px rgba(0, 199, 255, .35),
+                0 6px 18px rgba(0, 0, 0, .32);
+            transform: translateY(-1px);
+        }
+
+        .cinemaHoverConfigurationPage .cinemaHoverTabPanel {
+            display: none;
+            padding: 1.15em;
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .045);
+        }
+
+        .cinemaHoverConfigurationPage .cinemaHoverTabPanel.active {
+            display: block;
+        }
+
+        .cinemaHoverConfigurationPage .fieldDescription {
+            opacity: .78;
+        }
+
+        .cinemaHoverConfigurationPage .cinemaHoverSaveButton {
+            margin-top: 1.5em;
+        }
+    </style>
+
+    <script src="/web/ConfigurationPage?name=cinemahoverjs"></script>
+</div>
