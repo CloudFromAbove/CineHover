@@ -1,0 +1,27 @@
+cat > .gitignore <<'EOF'
+bin/
+obj/
+.vs/
+.vscode/.history/
+TestResults/
+coverage/
+dist/
+.cleanup-backups/
+
+*.user
+*.suo
+*.log
+*.tmp
+*.bak
+*.orig
+*.rej
+*.before-*
+patch-*.py
+patch-phase*.py
+Texte collé*.txt
+scan-before-clean.txt
+scan-project-before-clean.sh
+
+.DS_Store
+Thumbs.db
+EOF
