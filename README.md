@@ -109,14 +109,14 @@ If it does not appear, see [Troubleshooting](#%EF%B8%8F-troubleshooting).
 
 <sub>Local trailers</sub>
 
-<img src="https://github.com/user-attachments/assets/4fd2ce29-df77-4fd3-aa99-e74214dae90e" width="600" alt="Centered Positioning preview"/>
+<img src="screenshots/screenshot_local_trailer.png" width="600" alt="Centered Positioning preview"/>
 
 </td>
 <td align="center">
 
 <sub>Youtube trailers (the buttons disappear after a few seconds)</sub>
 
-<img src="https://github.com/user-attachments/assets/98d8353c-7698-4335-b7b0-d7ba207b57a7" width="600" alt="Custom Positioning preview"/>
+<img src="screenshots/screenshot_youtube_trailer.png" width="600" alt="Custom Positioning preview"/>
 
 </td>
 </tr>
@@ -126,7 +126,7 @@ If it does not appear, see [Troubleshooting](#%EF%B8%8F-troubleshooting).
 <summary>▶️ <b>Show Preview Video</b></summary>
 <br/>
 
-<img src="https://github.com/user-attachments/assets/d57be602-2a0a-42b9-bd55-ee1294a31d4f" width="700" alt=""/>
+<img src="screenshots/demo.gif" width="700" alt=""/>
 
 </details>
 
