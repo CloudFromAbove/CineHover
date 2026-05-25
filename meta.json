@@ -1,0 +1,12 @@
+{
+  "name": "CineHover",
+  "guid": "0caebf89-0651-4513-987f-7cb23035e5d5",
+  "owner": "CloudFromAbove",
+  "category": "General",
+  "description": "Cinematic hover previews for Jellyfin movies and series.",
+  "targetAbi": "10.11.0.0",
+  "repository": "https://github.com/CloudFromAbove/CineHover",
+  "manifest": "https://raw.githubusercontent.com/CloudFromAbove/CineHover/main/manifest.json",
+  "license": "GPL-3.0",
+  "status": "beta"
+}
