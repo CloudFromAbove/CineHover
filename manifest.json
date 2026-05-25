@@ -14,31 +14,7 @@
         "targetAbi": "10.11.0.0",
         "sourceUrl": "https://github.com/CloudFromAbove/CineHover/releases/download/v0.2.0-beta/CineHover-0.2.0-beta.zip",
         "checksum": "b57ee40babf4d0cfd8d7f94baf3d2fbb",
-        "timestamp": "2026-05-25T09:38:38Z"
-      },
-      {
-        "version": "0.1.2.0",
-        "changelog": "Fixes plugin metadata consistency, displayed name, logo URL and installation reliability.",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/CloudFromAbove/CineHover/releases/download/v0.1.2-alpha/CineHover-0.1.2-alpha.zip",
-        "checksum": "bcda7c0f40021dceb1e516632d1f5410",
-        "timestamp": "2026-05-25T08:30:00Z"
-      },
-      {
-        "version": "0.1.1.0",
-        "changelog": "Fixes JavaScript Injector automatic loader registration startup.",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/CloudFromAbove/CineHover/releases/download/v0.1.1-alpha/CineHover-0.1.1-alpha.zip",
-        "checksum": "2923cf76a6b16944d41844cf0fd6f60f",
-        "timestamp": "2026-05-24T21:30:00Z"
-      },
-      {
-        "version": "0.1.0.0",
-        "changelog": "Initial experimental alpha release.",
-        "targetAbi": "10.11.0.0",
-        "sourceUrl": "https://github.com/CloudFromAbove/CineHover/releases/download/v0.1.0-alpha/CineHover-0.1.0-alpha.zip",
-        "checksum": "33f51cb6ec5b68b122f2abdd9835f320",
-        "timestamp": "2026-05-24T20:19:17Z"
+        "timestamp": "2026-05-25T10:30:00Z"
       }
     ]
   }
