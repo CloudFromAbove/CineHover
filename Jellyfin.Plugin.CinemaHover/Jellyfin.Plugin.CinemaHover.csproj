@@ -1,6 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <FileVersion>0.1.2.0</FileVersion>
+    <AssemblyVersion>0.1.2.0</AssemblyVersion>
+    <Version>0.1.2.0</Version>
     <TargetFramework>net9.0</TargetFramework>
     <AssemblyName>Jellyfin.Plugin.CinemaHover</AssemblyName>
     <RootNamespace>Jellyfin.Plugin.CinemaHover</RootNamespace>
