@@ -3,10 +3,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Jellyfin%20Version-10.11+-AA5CC3?logo=jellyfin&logoColor=00A4DC&labelColor=111111" alt="Jellyfin 10.11+" />
   <img src="https://img.shields.io/badge/Status-Experimental-00A4DC?labelColor=111111" alt="Experimental" />
-  <img src="https://img.shields.io/badge/UI-Cinematic-AC05FF?labelColor=111111" alt="Cinematic UI" />
-  <img src="https://img.shields.io/badge/Requires-JavaScript%20Injector-black?logo=javascript" alt="Requires JavaScript Injector" />
-  <img src="https://img.shields.io/badge/Requires-File%20Transformation-AA5CC3?labelColor=111111" alt="Requires File Transformation" />
-  <br><br>
   <a href="https://github.com/CloudFromAbove/CineHover/releases">
     <img alt="Latest Release" src="https://img.shields.io/github/v/release/CloudFromAbove/CineHover?include_prereleases&label=Latest%20Release&labelColor=111111&color=AA5CC3" />
   </a>
