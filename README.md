@@ -95,7 +95,7 @@ After the full restart, JavaScript Injector should show a plugin script named:
 CinemaHover Loader
 ```
 
-If it does not appear, see [Troubleshooting](#-troubleshooting).
+If it does not appear, see [Troubleshooting](#-Troubleshooting).
 
 ---
 
