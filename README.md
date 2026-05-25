@@ -136,7 +136,7 @@ If it does not appear, see [Troubleshooting](#%EF%B8%8F-troubleshooting).
 
 ## ✨ Features
 
-### 🎞️ Cinematic hover panels
+### 🎞️ Elegant and minimalistic hover panels
 
 - Hover panels on movie and series cards; episodes are intentionally excluded
 - Trailer or backdrop preview depending on available metadata and settings
