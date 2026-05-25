@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build CineHover
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Restore
+        run: dotnet restore Jellyfin.Plugin.CinemaHover/Jellyfin.Plugin.CinemaHover.csproj
+
+      - name: Build
+        run: dotnet build Jellyfin.Plugin.CinemaHover/Jellyfin.Plugin.CinemaHover.csproj -c Release --no-restore
