@@ -6,7 +6,7 @@
     "overview": "Adds cinematic hover panels with trailers, metadata, production flags and compact language badges to Jellyfin Web.",
     "owner": "CloudFromAbove",
     "category": "General",
-    "imageUrl": "https://raw.githubusercontent.com/CloudFromAbove/CineHover/main/docs/images/logo.png",
+    "imageUrl": "https://raw.githubusercontent.com/CloudFromAbove/CineHover/main/logo/logo.png",
     "versions": [
       {
         "version": "0.1.1.0",
