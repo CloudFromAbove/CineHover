@@ -9,6 +9,14 @@
     "imageUrl": "https://raw.githubusercontent.com/CloudFromAbove/CineHover/main/logo/logo.png",
     "versions": [
       {
+        "version": "0.2.0.0",
+        "changelog": "First beta release. CineHover is now installable through the Jellyfin plugin repository manifest and includes automatic JavaScript Injector loader registration, movie and series hover previews, trailer support, language badges and improved documentation. Some known bugs remain and feedback is welcome.",
+        "targetAbi": "10.11.0.0",
+        "sourceUrl": "https://github.com/CloudFromAbove/CineHover/releases/download/v0.2.0-beta/CineHover-0.2.0-beta.zip",
+        "checksum": "b57ee40babf4d0cfd8d7f94baf3d2fbb",
+        "timestamp": "2026-05-25T09:38:38Z"
+      },
+      {
         "version": "0.1.2.0",
         "changelog": "Fixes plugin metadata consistency, displayed name, logo URL and installation reliability.",
         "targetAbi": "10.11.0.0",

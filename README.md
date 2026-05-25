@@ -36,6 +36,11 @@ It brings trailers, backdrop previews, metadata, production flags and compact la
 
 ---
 
+> [!NOTE]
+> CineHover is currently in beta.
+>
+> The plugin is usable and installable through the Jellyfin plugin repository manifest, but some bugs and edge cases remain. Feedback, issue reports and compatibility testing are welcome.
+
 ## 🚀 Quick Start
 
 ### 1. Install the required companion plugins

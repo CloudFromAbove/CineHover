@@ -20,7 +20,7 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages
 
     public static Plugin? Instance { get; private set; }
 
-    public override string Name => "Cinema Hover";
+    public override string Name => "CineHover";
 
     public override Guid Id => Guid.Parse("0caebf89-0651-4513-987f-7cb23035e5d5");
 
