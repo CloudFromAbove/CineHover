@@ -366,17 +366,19 @@
             PLUGIN_CONFIG_LOADED =
                 true;
 
-            console.log(
-                "[CinemaHover] Config plugin chargée",
-                {
-                    PLUGIN_ENABLED,
-                    ENABLE_LOCAL_TRAILERS,
-                    ENABLE_YOUTUBE_TRAILERS,
-                    PREFER_LOCAL_TRAILERS,
-                    DISABLE_ON_TOUCH_DEVICES,
-                    DISABLE_UNDER_WIDTH
-                }
-            );
+            if (DEBUG_HOVER) {
+                console.log(
+                    "[CinemaHover] Config plugin chargée",
+                    {
+                        PLUGIN_ENABLED,
+                        ENABLE_LOCAL_TRAILERS,
+                        ENABLE_YOUTUBE_TRAILERS,
+                        PREFER_LOCAL_TRAILERS,
+                        DISABLE_ON_TOUCH_DEVICES,
+                        DISABLE_UNDER_WIDTH
+                    }
+                );
+            }
 
         } catch (error) {
             console.warn(
@@ -441,18 +443,20 @@
                 delete card.dataset.hoverBound;
             });
 
-        console.log("[CinemaHover] Runtime disabled.", {
-            reason,
-            pluginEnabled: PLUGIN_ENABLED,
-            disableOnTouchDevices: DISABLE_ON_TOUCH_DEVICES,
-            disableUnderWidth: DISABLE_UNDER_WIDTH,
-            touch: isTouchDevice(),
-            mobileLayout: isMobileLayout(),
-            innerWidth: window.innerWidth,
-            hoverBound: document.querySelectorAll("[data-hoverBound]").length,
-            hoverPanels: document.querySelectorAll(".jf-hoverTrailer").length,
-            visibleHoverPanels: document.querySelectorAll(".jf-hoverTrailer.jf-hover-visible").length
-        });
+        if (DEBUG_HOVER) {
+            console.log("[CinemaHover] Runtime disabled.", {
+                reason,
+                pluginEnabled: PLUGIN_ENABLED,
+                disableOnTouchDevices: DISABLE_ON_TOUCH_DEVICES,
+                disableUnderWidth: DISABLE_UNDER_WIDTH,
+                touch: isTouchDevice(),
+                mobileLayout: isMobileLayout(),
+                innerWidth: window.innerWidth,
+                hoverBound: document.querySelectorAll("[data-hoverBound]").length,
+                hoverPanels: document.querySelectorAll(".jf-hoverTrailer").length,
+                visibleHoverPanels: document.querySelectorAll(".jf-hoverTrailer.jf-hover-visible").length
+            });
+        }
     }
 
     async function getCachedItem(itemId) {
@@ -4281,20 +4285,22 @@ if (false) {
         scheduleBindCards();
     }
 
-    window.CinemaHoverRuntimeDebug = function () {
-        return {
-            pluginEnabled: PLUGIN_ENABLED,
-            disableOnTouchDevices: DISABLE_ON_TOUCH_DEVICES,
-            disableUnderWidth: DISABLE_UNDER_WIDTH,
-            touch: isTouchDevice(),
-            mobileLayout: isMobileLayout(),
-            innerWidth: window.innerWidth,
-            disabled: shouldDisableCinemaHoverRuntime(),
-            hoverBound: document.querySelectorAll("[data-hoverBound]").length,
-            hoverPanels: document.querySelectorAll(".jf-hoverTrailer").length,
-            visibleHoverPanels: document.querySelectorAll(".jf-hoverTrailer.jf-hover-visible").length
+    if (DEBUG_HOVER) {
+        window.CinemaHoverRuntimeDebug = function () {
+            return {
+                pluginEnabled: PLUGIN_ENABLED,
+                disableOnTouchDevices: DISABLE_ON_TOUCH_DEVICES,
+                disableUnderWidth: DISABLE_UNDER_WIDTH,
+                touch: isTouchDevice(),
+                mobileLayout: isMobileLayout(),
+                innerWidth: window.innerWidth,
+                disabled: shouldDisableCinemaHoverRuntime(),
+                hoverBound: document.querySelectorAll("[data-hoverBound]").length,
+                hoverPanels: document.querySelectorAll(".jf-hoverTrailer").length,
+                visibleHoverPanels: document.querySelectorAll(".jf-hoverTrailer.jf-hover-visible").length
+            };
         };
-    };
+    }
 
     bootCinemaHover();
 
