@@ -10,11 +10,11 @@
     "versions": [
       {
         "version": "0.2.1.0",
-        "changelog": "CineHover 0.2.1-beta",
+        "changelog": "CineHover 0.2.1-beta: corrected package structure and mobile hover disabling fix.",
         "targetAbi": "10.11.0.0",
         "sourceUrl": "https://github.com/CloudFromAbove/CineHover/releases/download/v0.2.1-beta/CineHover-0.2.1-beta.zip",
-        "checksum": "9c7c5f0553f5bbf0d079be96ee0e4eca",
-        "timestamp": "2026-06-12T16:22:11Z"
+        "checksum": "e55b58bdecf2e85850bccd4ed21b3bc8",
+        "timestamp": "2026-06-12T17:05:03Z"
       },
       {
         "version": "0.2.0.0",
