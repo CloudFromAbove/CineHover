@@ -83,6 +83,8 @@
     let DISABLE_ON_TOUCH_DEVICES = true;
     let DISABLE_UNDER_WIDTH = 0;
 
+    const DEFAULT_MOBILE_DISABLE_WIDTH = 768;
+
     let PLUGIN_CONFIG_LOADED = false;
 
     let LOCAL_TRAILER_COOLDOWN_MS = 800;
@@ -364,17 +366,19 @@
             PLUGIN_CONFIG_LOADED =
                 true;
 
-            console.log(
-                "[CinemaHover] Config plugin chargée",
-                {
-                    PLUGIN_ENABLED,
-                    ENABLE_LOCAL_TRAILERS,
-                    ENABLE_YOUTUBE_TRAILERS,
-                    PREFER_LOCAL_TRAILERS,
-                    DISABLE_ON_TOUCH_DEVICES,
-                    DISABLE_UNDER_WIDTH
-                }
-            );
+            if (DEBUG_HOVER) {
+                console.log(
+                    "[CinemaHover] Config plugin chargée",
+                    {
+                        PLUGIN_ENABLED,
+                        ENABLE_LOCAL_TRAILERS,
+                        ENABLE_YOUTUBE_TRAILERS,
+                        PREFER_LOCAL_TRAILERS,
+                        DISABLE_ON_TOUCH_DEVICES,
+                        DISABLE_UNDER_WIDTH
+                    }
+                );
+            }
 
         } catch (error) {
             console.warn(
@@ -387,10 +391,72 @@
     }
 
     function isTouchDevice() {
-        return (
-            window.matchMedia("(pointer: coarse)").matches ||
-            navigator.maxTouchPoints > 0
+        return Boolean(
+            (
+                window.matchMedia &&
+                (
+                    window.matchMedia("(pointer: coarse)").matches ||
+                    window.matchMedia("(hover: none)").matches ||
+                    window.matchMedia("(any-pointer: coarse)").matches ||
+                    window.matchMedia("(any-hover: none)").matches
+                )
+            ) ||
+            navigator.maxTouchPoints > 0 ||
+            navigator.msMaxTouchPoints > 0 ||
+            "ontouchstart" in window
         );
+    }
+
+    function isMobileLayout() {
+        return window.innerWidth <= DEFAULT_MOBILE_DISABLE_WIDTH;
+    }
+
+    function shouldDisableCinemaHoverRuntime() {
+        return Boolean(
+            !PLUGIN_ENABLED ||
+            (
+                DISABLE_ON_TOUCH_DEVICES &&
+                (
+                    isTouchDevice() ||
+                    isMobileLayout()
+                )
+            ) ||
+            (
+                DISABLE_UNDER_WIDTH > 0 &&
+                window.innerWidth < DISABLE_UNDER_WIDTH
+            )
+        );
+    }
+
+    function disableCinemaHoverRuntime(reason) {
+        clearTimeout(globalOpenTimer);
+        clearBridgeHold();
+        destroyAllHovers();
+
+        document
+            .querySelectorAll(".jf-hoverTrailer")
+            .forEach(el => el.remove());
+
+        document
+            .querySelectorAll("[data-hoverBound]")
+            .forEach(card => {
+                delete card.dataset.hoverBound;
+            });
+
+        if (DEBUG_HOVER) {
+            console.log("[CinemaHover] Runtime disabled.", {
+                reason,
+                pluginEnabled: PLUGIN_ENABLED,
+                disableOnTouchDevices: DISABLE_ON_TOUCH_DEVICES,
+                disableUnderWidth: DISABLE_UNDER_WIDTH,
+                touch: isTouchDevice(),
+                mobileLayout: isMobileLayout(),
+                innerWidth: window.innerWidth,
+                hoverBound: document.querySelectorAll("[data-hoverBound]").length,
+                hoverPanels: document.querySelectorAll(".jf-hoverTrailer").length,
+                visibleHoverPanels: document.querySelectorAll(".jf-hoverTrailer.jf-hover-visible").length
+            });
+        }
     }
 
     async function getCachedItem(itemId) {
@@ -3789,6 +3855,11 @@
 
     async function showHover(card) {
 
+        if (shouldDisableCinemaHoverRuntime()) {
+            disableCinemaHoverRuntime("showHover");
+            return;
+        }
+
         if (
             isHoverInteractionBlocked(
                 lastPointerX,
@@ -3947,6 +4018,11 @@
     }
 
     function scheduleBindCards() {
+        if (shouldDisableCinemaHoverRuntime()) {
+            disableCinemaHoverRuntime("scheduleBindCards");
+            return;
+        }
+
         bindCards();
 
         setTimeout(
@@ -3971,6 +4047,11 @@
     }
 
     function bindCards() {
+        if (shouldDisableCinemaHoverRuntime()) {
+            disableCinemaHoverRuntime("bindCards");
+            return;
+        }
+
         if (!PLUGIN_CONFIG_LOADED) {
             if (DEBUG_HOVER) {
                 console.log(
@@ -3996,6 +4077,11 @@
                 card,
                 "mouseenter",
                 event => {
+                    if (shouldDisableCinemaHoverRuntime()) {
+                        disableCinemaHoverRuntime("mouseenter");
+                        return;
+                    }
+
                     lastPointerX =
                         event.clientX;
 
@@ -4110,6 +4196,10 @@
         "resize",
         () => {
             destroyAllHovers();
+
+            if (shouldDisableCinemaHoverRuntime()) {
+                disableCinemaHoverRuntime("resize");
+            }
         }
     );
 
@@ -4142,6 +4232,11 @@
     const observer =
         new MutationObserver(() => {
             if (PLUGIN_CONFIG_LOADED) {
+                if (shouldDisableCinemaHoverRuntime()) {
+                    disableCinemaHoverRuntime("mutation");
+                    return;
+                }
+
                 bindCards();
             }
         });
@@ -4182,35 +4277,29 @@ if (false) {
         await waitForCinemaHoverRuntime();
         await loadCinemaHoverPluginConfig();
 
-        if (!PLUGIN_ENABLED) {
-            console.log("[CinemaHover] Plugin désactivé par la configuration.");
-            return;
-        }
-
-        if (
-            DISABLE_ON_TOUCH_DEVICES &&
-            isTouchDevice()
-        ) {
-            console.log("[CinemaHover] Désactivé sur appareil tactile.");
-            return;
-        }
-
-        if (
-            DISABLE_UNDER_WIDTH > 0 &&
-            window.innerWidth < DISABLE_UNDER_WIDTH
-        ) {
-            console.log(
-                "[CinemaHover] Désactivé par largeur de fenêtre.",
-                {
-                    innerWidth: window.innerWidth,
-                    disableUnderWidth: DISABLE_UNDER_WIDTH
-                }
-            );
-
+        if (shouldDisableCinemaHoverRuntime()) {
+            disableCinemaHoverRuntime("boot");
             return;
         }
 
         scheduleBindCards();
+    }
+
+    if (DEBUG_HOVER) {
+        window.CinemaHoverRuntimeDebug = function () {
+            return {
+                pluginEnabled: PLUGIN_ENABLED,
+                disableOnTouchDevices: DISABLE_ON_TOUCH_DEVICES,
+                disableUnderWidth: DISABLE_UNDER_WIDTH,
+                touch: isTouchDevice(),
+                mobileLayout: isMobileLayout(),
+                innerWidth: window.innerWidth,
+                disabled: shouldDisableCinemaHoverRuntime(),
+                hoverBound: document.querySelectorAll("[data-hoverBound]").length,
+                hoverPanels: document.querySelectorAll(".jf-hoverTrailer").length,
+                visibleHoverPanels: document.querySelectorAll(".jf-hoverTrailer.jf-hover-visible").length
+            };
+        };
     }
 
     bootCinemaHover();
