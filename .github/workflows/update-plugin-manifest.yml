@@ -1,0 +1,86 @@
+name: Update plugin manifest
+
+on:
+  release:
+    types:
+      - published
+
+permissions:
+  contents: write
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Download release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          mkdir -p /tmp/cinehover-release
+
+          for i in 1 2 3 4 5; do
+            gh release download "$TAG" \
+              --repo "$REPO" \
+              --pattern "*.zip" \
+              --dir /tmp/cinehover-release && break
+
+            echo "Release asset not ready yet, retry $i..."
+            sleep 5
+          done
+
+          ZIP_PATH="$(find /tmp/cinehover-release -type f -name "*.zip" | head -n 1)"
+
+          if [ -z "$ZIP_PATH" ]; then
+            echo "No zip asset found for release $TAG"
+            exit 1
+          fi
+
+          echo "ZIP_PATH=$ZIP_PATH" >> "$GITHUB_ENV"
+          echo "ASSET_NAME=$(basename "$ZIP_PATH")" >> "$GITHUB_ENV"
+          echo "CHECKSUM=$(sha256sum "$ZIP_PATH" | awk '{print $1}')" >> "$GITHUB_ENV"
+
+      - name: Update manifest
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+          REPO: ${{ github.repository }}
+          MANIFEST_PATH: manifest.json
+          JELLYFIN_TARGET_ABI: ""
+        run: |
+          set -euo pipefail
+
+          VERSION="${TAG#v}"
+
+          scripts/update-jellyfin-manifest.py \
+            "$MANIFEST_PATH" \
+            "$VERSION" \
+            "$TAG" \
+            "$ASSET_NAME" \
+            "$REPO" \
+            "$CHECKSUM"
+
+      - name: Commit manifest update
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add manifest.json
+
+          if git diff --cached --quiet; then
+            echo "Manifest already up to date."
+            exit 0
+          fi
+
+          git commit -m "Update plugin manifest for ${{ github.event.release.tag_name }}"
+          git push origin HEAD:main
