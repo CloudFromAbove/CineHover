@@ -9,7 +9,7 @@
     "imageUrl": "https://raw.githubusercontent.com/CloudFromAbove/CineHover/main/logo/logo.png",
     "versions": [
       {
-        "version": "0.2.1-beta",
+        "version": "0.2.1.0",
         "changelog": "CineHover 0.2.1-beta",
         "targetAbi": "10.11.0.0",
         "sourceUrl": "https://github.com/CloudFromAbove/CineHover/releases/download/v0.2.1-beta/CineHover-0.2.1-beta.zip",
